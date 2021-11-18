@@ -17,6 +17,7 @@ for news in root[0]:
     tokens = sorted(nltk.word_tokenize(news[1].text.lower()), reverse=True)
     tokens = [lemmatize(word) for word in tokens]
     tokens = [word for word in tokens if word not in not_cool]
+    tokens = [word for word in tokens if nltk.pos_tag([word])[0][1] == "NN"]
     cd = Counter(tokens).most_common(5)
     top_five = " ".join(x[0] for x in cd)
     print(head + ":", top_five, sep="\n", end='\n\n')
